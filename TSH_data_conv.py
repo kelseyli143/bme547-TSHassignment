@@ -72,8 +72,6 @@ def create_jsons(patient_info):
         if index == 4:
             index = 0
 
-    return patient_info
-
 
 def find_name(line):
     """Extracts the patient's first and last name from the patient information
@@ -143,8 +141,8 @@ def TSH_values(line):
     """Extracts the patient's TSH values from the patient information text file
 
     This function uses python's split function to split the TSH values string
-    into a list of values. It then converts each individual TSH value to a float
-    and sorts them from lowest to highest.
+    into a list of values. It then converts each individual TSH value to a
+    float and sorts them from lowest to highest.
 
      Args:
          line (string): the line corresponding to the patient's TSH values,
