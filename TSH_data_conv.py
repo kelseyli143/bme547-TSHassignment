@@ -15,10 +15,11 @@ def read_data():
     contains all of the patient info. It pops out the last line, which is
     not part of the patient data but rather says 'END'.
 
-    Returns:
-        list: the patient info from the text file with each line as an item
-        in a list
-    """
+     Returns:
+         list: the patient info from the text file with each line as an item
+         in a list
+     """
+
     test_data = open("test_data.txt", "r")
     patient_info = test_data.readlines()
     # patient_info is a list where each line is a string
@@ -38,10 +39,11 @@ def create_jsons(patient_info):
     the file. It then creates a dictionary and outputs a json file for each
     individual patient.
 
-    Args:
-        patient_info (list): the patient info from the text file with each
-        line as an item in a list
-    """
+     Args:
+         patient_info (list): the patient info from the text file with
+         each line as an item in a list
+     """
+
     index = 0
     for line in patient_info:
         if index == 0:
@@ -77,17 +79,20 @@ def find_name(line):
     """Extracts the patient's first and last name from the patient information
     text file
 
-    Args:
-        line (string): the line corresponding to the patient's name, from
-        the loop in the create_jsons function
+    Finds and returns the patient's first and last name using the string split
+    function in python
 
-    Returns:
-        string: patient's first name
-        string: patient's last name
-    """
+     Args:
+         line (string): the line corresponding to the patient's name, from
+         the loop in the create_jsons function
+
+     Returns:
+         string: patient's first name
+         string: patient's last name
+     """
+
     name = line
     first_last = name.split()
-    # print(first_last)
     firstname = first_last[0]
     lastname = first_last[1]
     # print(firstname)
@@ -98,13 +103,17 @@ def find_name(line):
 def find_age(line):
     """Extracts the patient's age from the patient information text file
 
+    Finds the patient's age from the text file, and extracts the age string.
+    The function then converts the string to a float
+
      Args:
          line (string): the line corresponding to the patient's age, from
          the loop in the create_jsons function
 
      Returns:
          int: patient's age
-     """
+      """
+
     age_str = line
     age = int(age_str)
     # print(age)
@@ -114,6 +123,9 @@ def find_age(line):
 def find_gender(line):
     """Extracts the patient's gender from the patient information text file
 
+    This function takes the gender from the text file and uses python's strip
+    function to remove the new line symbol and the end of the string
+
      Args:
          line (string): the line corresponding to the patient's gender, from
          the loop in the create_jsons function
@@ -121,6 +133,7 @@ def find_gender(line):
      Returns:
          string: the patient's gender
      """
+
     gender = line.strip()
     # print(gender)
     return gender
@@ -129,6 +142,10 @@ def find_gender(line):
 def TSH_values(line):
     """Extracts the patient's TSH values from the patient information text file
 
+    This function uses python's split function to split the TSH values string
+    into a list of values. It then converts each individual TSH value to a float
+    and sorts them from lowest to highest.
+
      Args:
          line (string): the line corresponding to the patient's TSH values,
          from the loop in the create_jsons function
@@ -136,6 +153,7 @@ def TSH_values(line):
      Returns:
          list: the patient's TSH values, is a list of floats
      """
+
     TSH_list = line.split(',')
     TSH_list.pop(0)
     TSH = [float(i) for i in TSH_list]
@@ -147,6 +165,14 @@ def TSH_values(line):
 def TSH_diagnosis(TSH):
     """Determines the patient's diagnosis based on their TSH levels
 
+    This function evaluates the list of TSH values and determines a diagnosis.
+    Hypothyroidism is a condition where the thyroid gland produces too little
+    of the hormone thyroxine, and hyperthyroidism is the condition where too
+    much thyroxine is produced. If any of the TSH values is less than 1, the
+    diagnosis is hyperthyroidism. If any are greater than 4, the diagnosis is
+    hypothyroidism. If neither case is true, the diagnosis is normal
+    thyroid function.
+
      Args:
          TSH (list): the patient's TSH values, is a list of floats
 
@@ -154,6 +180,7 @@ def TSH_diagnosis(TSH):
          string: patient's diagnosis, will return either hyperthyroidism,
          hypothyroidism, or normal thyroid function
      """
+
     hyper_TSH = []
     hypo_TSH = []
     for i in TSH:
@@ -169,7 +196,7 @@ def TSH_diagnosis(TSH):
         diagnosis = 'hypothyroidism'
     elif len(hyper_TSH) == 0 and len(hypo_TSH) == 0:
         diagnosis = 'normal thyroid function'
-    print(diagnosis)
+    # print(diagnosis)
     return diagnosis
 
 
