@@ -3,11 +3,7 @@ import json
 
 def main():
       patient_info = read_data()
-      find_name()
-      find_age()
-      find_gender()
-      TSH = TSH_values()
-      TSH_diagnosis(TSH)
+      create_jsons(patient_info)
 
 
 def read_data():
@@ -19,37 +15,76 @@ def read_data():
     return patient_info
 
 
-def find_name():
-    name = 'Anne Boynton'
+def create_jsons(patient_info):
+    index = 0
+    for line in patient_info:
+        if index == 0:
+            firstName, lastName = find_name(line, patient_info)
+        if index == 1:
+            age = find_age(line, patient_info)
+        if index == 2:
+            gender = find_gender(line, patient_info)
+        if index == 3:
+            TSH = TSH_values(line, patient_info)
+            diagnosis = TSH_diagnosis(line, patient_info, TSH)
+            outDictionary = {
+                             "First Name": firstName,
+                             "Last Name": lastName,
+                             "age": age,
+                             "gender": gender,
+                             "diagnosis": diagnosis,
+                             "TSH": TSH
+                             }
+            out_file = open(firstName+"-"+lastName+".json", "w")
+            json.dump(outDictionary, out_file)
+            out_file.close()
+
+        index = index + 1
+
+        if index == 4:
+            index = 0
+
+    return patient_info
+
+
+def find_name(line, patient_info):
+    index = patient_info.index(line)
+    name = patient_info[index]
     first_last = name.split()
     # print(first_last)
     firstName = first_last[0]
     lastName = first_last[1]
-    print(firstName)
-    print(lastName)
+    # print(firstName)
+    # print(lastName)
     return firstName, lastName
 
 
-def find_age():
-    age_str = '45'
+def find_age(line, patient_info):
+    index = patient_info.index(line)
+    age_str = patient_info[index]
     age = int(age_str)
-    print(age)
+    # print(age)
     return age
 
-def find_gender():
-    gender = 'Female'
-    print(gender)
+
+def find_gender(line, patient_info):
+    index = patient_info.index(line)
+    gender = patient_info[index]
+    gender = gender.strip()
+    # print(gender)
     return gender
 
-def TSH_values():
-    TSHfromtext = 'TSH,3.5,3.6,1.8,2.8,1.9,3.4,3,3.6,3,4'
-    TSH_list = TSHfromtext.split(',')
+
+def TSH_values(line, patient_info):
+    TSH_list = line.split(',')
     TSH_list.pop(0)
     TSH = [float(i) for i in TSH_list]
-    print(TSH)
+    TSH.sort()
+    # print(TSH)
     return TSH
 
-def TSH_diagnosis(TSH):
+
+def TSH_diagnosis(line, patient_info, TSH):
     hyper_TSH = []
     hypo_TSH = []
     for i in TSH:
@@ -65,7 +100,7 @@ def TSH_diagnosis(TSH):
         diagnosis = 'hypothyroidism'
     elif len(hyper_TSH)==0 and len(hypo_TSH)==0:
         diagnosis = 'normal thyroid function'
-    print(diagnosis)
+    # print(diagnosis)
     return diagnosis
 
 
