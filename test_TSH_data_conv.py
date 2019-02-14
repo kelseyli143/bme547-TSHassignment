@@ -31,6 +31,12 @@ import pytest
                           'hyperthyroidism')
                          ])
 def test_TSH_diagnosis(a, expected):
+    """Tests the TSH_diagnosis function
+
+    Args:
+        a (list): the patient's TSH values, is a list of floats
+        expected (string): the expected diagnosis based on TSH values
+    """
     from TSH_data_conv import TSH_diagnosis
     answer = TSH_diagnosis(a)
     assert answer == expected
