@@ -1,0 +1,8 @@
+bme547-TSHassignment
+====================
+
+.. toctree::
+   :maxdepth: 4
+
+   TSH_data_conv
+   test_TSH_data_conv
