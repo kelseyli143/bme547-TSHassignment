@@ -1,0 +1,245 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>TSH_data_conv module &#8212; TSHassignment 0.0.1 documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="test_TSH_data_conv module" href="test_TSH_data_conv.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-TSH_data_conv">
+<span id="tsh-data-conv-module"></span><h1>TSH_data_conv module<a class="headerlink" href="#module-TSH_data_conv" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="TSH_data_conv.TSH_diagnosis">
+<code class="descclassname">TSH_data_conv.</code><code class="descname">TSH_diagnosis</code><span class="sig-paren">(</span><em>TSH</em><span class="sig-paren">)</span><a class="headerlink" href="#TSH_data_conv.TSH_diagnosis" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines the patient’s diagnosis based on their TSH levels</p>
+<p>This function evaluates the list of TSH values and determines a diagnosis.
+Hypothyroidism is a condition where the thyroid gland produces too little
+of the hormone thyroxine, and hyperthyroidism is the condition where too
+much thyroxine is produced. If any of the TSH values is less than 1, the
+diagnosis is hyperthyroidism. If any are greater than 4, the diagnosis is
+hypothyroidism. If neither case is true, the diagnosis is normal
+thyroid function.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd>TSH (list): the patient’s TSH values, is a list of floats</dd>
+<dt>Returns:</dt>
+<dd>string: patient’s diagnosis, will return either hyperthyroidism,
+hypothyroidism, or normal thyroid function</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="TSH_data_conv.TSH_values">
+<code class="descclassname">TSH_data_conv.</code><code class="descname">TSH_values</code><span class="sig-paren">(</span><em>line</em><span class="sig-paren">)</span><a class="headerlink" href="#TSH_data_conv.TSH_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts the patient’s TSH values from the patient information text file</p>
+<p>This function uses python’s split function to split the TSH values string
+into a list of values. It then converts each individual TSH value to a float
+and sorts them from lowest to highest.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd>line (string): the line corresponding to the patient’s TSH values,
+from the loop in the create_jsons function</dd>
+<dt>Returns:</dt>
+<dd>list: the patient’s TSH values, is a list of floats</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="TSH_data_conv.create_jsons">
+<code class="descclassname">TSH_data_conv.</code><code class="descname">create_jsons</code><span class="sig-paren">(</span><em>patient_info</em><span class="sig-paren">)</span><a class="headerlink" href="#TSH_data_conv.create_jsons" title="Permalink to this definition">¶</a></dt>
+<dd><p>Outputs json file for each patient with their information and diagnosis</p>
+<p>This code starts with an index of 0. It increments the index value by 1
+each time it runs through the loop, and resets back to 0 once the index
+value hits 4. This index keeps track of the type of information in the
+patient information text file. This function calls functions to find the
+name, age, gender, TSH values,and diagnosis based on the TSH values in
+the file. It then creates a dictionary and outputs a json file for each
+individual patient.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd>patient_info (list): the patient info from the text file with
+each line as an item in a list</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="TSH_data_conv.find_age">
+<code class="descclassname">TSH_data_conv.</code><code class="descname">find_age</code><span class="sig-paren">(</span><em>line</em><span class="sig-paren">)</span><a class="headerlink" href="#TSH_data_conv.find_age" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts the patient’s age from the patient information text file</p>
+<p>Finds the patient’s age from the text file, and extracts the age string.
+The function then converts the string to a float</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd>line (string): the line corresponding to the patient’s age, from
+the loop in the create_jsons function</dd>
+<dt>Returns:</dt>
+<dd>int: patient’s age</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="TSH_data_conv.find_gender">
+<code class="descclassname">TSH_data_conv.</code><code class="descname">find_gender</code><span class="sig-paren">(</span><em>line</em><span class="sig-paren">)</span><a class="headerlink" href="#TSH_data_conv.find_gender" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts the patient’s gender from the patient information text file</p>
+<p>This function takes the gender from the text file and uses python’s strip
+function to remove the new line symbol and the end of the string</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd>line (string): the line corresponding to the patient’s gender, from
+the loop in the create_jsons function</dd>
+<dt>Returns:</dt>
+<dd>string: the patient’s gender</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="TSH_data_conv.find_name">
+<code class="descclassname">TSH_data_conv.</code><code class="descname">find_name</code><span class="sig-paren">(</span><em>line</em><span class="sig-paren">)</span><a class="headerlink" href="#TSH_data_conv.find_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extracts the patient’s first and last name from the patient information
+text file</p>
+<p>Finds and returns the patient’s first and last name using the string split
+function in python</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Args:</dt>
+<dd>line (string): the line corresponding to the patient’s name, from
+the loop in the create_jsons function</dd>
+<dt>Returns:</dt>
+<dd>string: patient’s first name
+string: patient’s last name</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+<dl class="function">
+<dt id="TSH_data_conv.main">
+<code class="descclassname">TSH_data_conv.</code><code class="descname">main</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TSH_data_conv.main" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="TSH_data_conv.read_data">
+<code class="descclassname">TSH_data_conv.</code><code class="descname">read_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#TSH_data_conv.read_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reads data in from the text file</p>
+<p>This function reads in the data line by line from the text file that
+contains all of the patient info. It pops out the last line, which is
+not part of the patient data but rather says ‘END’.</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>Returns:</dt>
+<dd>list: the patient info from the text file with each line as an item
+in a list</dd>
+</dl>
+</div></blockquote>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">TSHassignment</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="test_TSH_data_conv.html">test_TSH_data_conv module</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">TSH_data_conv module</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="test_TSH_data_conv.html" title="previous chapter">test_TSH_data_conv module</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Kelsey Li.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.8.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/TSH_data_conv.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
